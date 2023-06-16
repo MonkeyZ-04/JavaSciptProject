@@ -14,11 +14,8 @@ body{
     flex-direction: column;
     align-items: center;
     justify-content: center;
-    min-height: 80vh;
+    min-height: 90vh;
     margin: 0;
-}
-.btn{
-    font-family: 'Mitr', sans-serif;
 }
 .container{
     margin: 30px auto;
@@ -38,4 +35,47 @@ h4{
 }
 .income-expense-container{
     display: flex;
+    justify-content: space-between;
+    background-color: #fff;
+    box-shadow: var(--box-shodow);
+    padding: 20px;
+    margin: 20px 0;
+}
+.income-expense-container div{
+    flex: 1;
+    text-align: center;
+}
+.income-expense-container div:first-of-type{
+    /* first-of-type = div ตัวแรก */
+    border-right: 1px solid #dedede;
+}
+.money.plus{
+    color: #2ecc71;
+}
+.money.minus{
+    color: red;
+}
+label{
+    display: inline-block;
+    margin: 10px 0;
+}
+input{
+    border: 1px solid #dedede;
+    display: block;
+    border-radius: 2px;
+    font-size: 16px;
+    padding: 10px;
+    width: 100%;
+}
+.btn{
+    font-family: 'Mitr', sans-serif;
+    background-color: purple;
+    color: white;
+    cursor: pointer;
+    box-shadow: var(--box-shodow);
+    display: block;
+    margin: 10px 0 30px;
+    padding: 10px;
+    font-size: 16px;
+    width: 100%;
 }

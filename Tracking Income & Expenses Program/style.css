@@ -4,11 +4,10 @@
     /* ตัวแปรไหนอยากใช้ preset นี้ก็แค่อ้างอิง box shadow */
 }
 *{
-    
+    font-family: 'Mitr', sans-serif;
     box-sizing: border-box;
 }
 body{
-    font-family: 'Mitr', sans-serif;
     background-color: #f7f7f7;
     display: flex;
     flex-direction: column;

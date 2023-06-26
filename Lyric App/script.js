@@ -31,10 +31,18 @@ function showData(songs){
                 <span>
                     <strong>${song.artist.name}</strong> - ${song.title}
                 </span>
-                <button>เนื้อเพลง</button>
+                <button class="btn">เนื้อเพลง</button>
                 </li>`    
 
             ).join("")}
         </ul>    
     `;
+    if(song.next){
+        more.innerHTML=`
+        ${songs.next ? `<button class="btn">Next</button>`: ''}
+        
+        `
+    }else{
+        more.innerHTML="";
+    }
 }

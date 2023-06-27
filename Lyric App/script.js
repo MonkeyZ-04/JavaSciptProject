@@ -17,7 +17,7 @@ form.addEventListener('submit',e=>{
 });
 
 async function searchLyrics(song){
-    const res = await fetch(`${apiURL}/suggest/${song}`);;
+    const res = await fetch(`${apiURL}/suggest/${song}`);
     //fetch ดึงข้อมูลจากapi
     const allSong = await res.json();
     showData(allSong);
@@ -31,18 +31,60 @@ function showData(songs){
                 <span>
                     <strong>${song.artist.name}</strong> - ${song.title}
                 </span>
-                <button class="btn">เนื้อเพลง</button>
+                <button class="btn"
+                 data-artist="${song.artist.name}"
+                 data-song="${song.title}"
+                >เนื้อเพลง</button>
                 </li>`    
 
             ).join("")}
         </ul>    
     `;
-    if(song.next){
+    if(song.next || songs.prev){
         more.innerHTML=`
-        ${songs.next ? `<button class="btn">Next</button>`: ''}
-        
-        `
+        ${songs.prev ? `<button class="btn" onclick="getMoreSongs(${songs.prev})">Next</button>`: ''}
+        ${songs.next ? `<button class="btn" onclick="getMoreSongs(${songs.next})">Next</button>`: ''}
+        `;
     }else{
         more.innerHTML="";
     }
+}
+
+async function getMoreSongs(songs){
+    const res = await fetch(`https://cors-anywhere.herokuapp.com/${songUrl}`);
+    const allSong = await res.json();
+    showData(allSong);
+}
+
+result.addEventListener('click',e=>{
+    const clickEl=e.target;
+
+    if(clickEl.tagName=="BUTTON"){
+        const artist = clickEl.getAttribute('data-artist');
+        const songName = clickEl.getAttribute('data-song');
+
+        getLyrics(artist,songName);
+    }
+});
+
+async function getLyrics(artist,songName){
+    const res = await fetch(`${apiURL}/v1/${artist}/${songName}`);
+    const data = await res.json();
+    const lyrics = data.lyrics.replace(/(\r\n|\r|\n)/g,"<br>");
+    if(lyrics){
+        result.innerHTML=`
+        <h2><span>
+        <strong>${artist}</strong> - ${songName}
+        </span></h2>
+        <span>${lyrics}</span>
+        `;
+    }else{
+        result.innerHTML=`
+        <h2><span>
+        <strong>${artist}</strong> - ${songName}
+        </span></h2>
+        <span>NO Data</span>
+        `;
+    }
+    more.innerHTML='';
 }

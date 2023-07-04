@@ -96,3 +96,14 @@ input{
     flex-direction: column;
     display: none;
 }
+.gameOver{
+    position: relative;
+    left: 0;
+    top: 5px;
+    border-radius: 8px;
+    border: none;
+}
+.gameOver:hover{
+    background-color: orange;
+    color: white;
+}

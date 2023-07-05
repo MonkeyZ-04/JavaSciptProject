@@ -15,6 +15,9 @@ const words=["เศรษฐี","แมว","หมู","ไก่","เคร
 let randomText;
 let score=0;
 let time=5;//easy => 15 , medium => 10,hard => 5
+const saveMode=localStorage.getItem('mode') !==null ?localStorage.getItem('mode') : 'medium';
+
+let level='medium';
 
 const timeInterval=setInterval(updateTime,1000);
 
@@ -25,13 +28,20 @@ function getRamdomWord(){
 function displayWordToUI(){
     randomText=getRamdomWord();
     wordEl.innerHTML = randomText;
+    timeEl.innerHTML=time;
 }
 textEl.addEventListener('input',(e)=>{
     const inputText=e.target.value;
 
     if(inputText === randomText){
         displayWordToUI();
-        time+=2;
+        if(saveMode == 'easy'){
+            time+=5;
+        }else if(saveMode == 'medium'){
+            time+=3;
+        }else{
+            time+=2;
+        }
         updateScore();
         e.target.value='';
     }
@@ -59,7 +69,26 @@ function gameOver(){
     `;
     gameoverEl.style.display='flex'
 }
+btnLevelEl.addEventListener('click',()=>{
+    settingsEl.classList.toggle('hide');
+});
 
 
-displayWordToUI();
+levelEl.addEventListener('change',(e)=>{
+    level=e.target.value;
+    localStorage.setItem("mode",level);
+});
+
+function startGame(){
+    levelEl.value=saveMode;
+    if(saveMode == 'easy'){
+        time=15;
+    }else if(saveMode == 'medium'){
+        time=10;
+    }else{
+        time=5;
+    }
+    displayWordToUI();
+}
+startGame();
 textEl.focus();

@@ -34,7 +34,6 @@ textEl.addEventListener('input',(e)=>{
     const inputText=e.target.value;
 
     if(inputText === randomText){
-        displayWordToUI();
         if(saveMode == 'easy'){
             time+=5;
         }else if(saveMode == 'medium'){
@@ -42,6 +41,7 @@ textEl.addEventListener('input',(e)=>{
         }else{
             time+=2;
         }
+        displayWordToUI();
         updateScore();
         e.target.value='';
     }

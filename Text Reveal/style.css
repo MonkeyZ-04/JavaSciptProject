@@ -17,3 +17,12 @@ img{
     width: 700px;
     max-width: 100%;
 }
+.text{
+    opacity: 0;
+    transform: translateY(15px);
+    transition: .5s;
+}
+.text.show-reveal{
+    opacity: 1;
+    transform: translateY(0px);
+}
